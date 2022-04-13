@@ -44,7 +44,7 @@ def take_a_screenshot(driver):
 
 
 
-def  accept_invitations_from_users(driver):
+def accept_invitations_from_users(driver):
   javaScript =  "window.scrollBy(0,0);"
   driver.execute_script(javaScript)
   element_exists =  True
@@ -57,4 +57,12 @@ def  accept_invitations_from_users(driver):
     finally :
       if element_exists:
         driver.find_element_by_class_name("invitation-card__action-btn artdeco-button--secondary").click()
+
+#connecting the functions and methods
+def start_bot(driver,url,network_url):
+  driver.get(url)
+  login_to_linkedin(driver)
+  goto_network_page(driver,network_url)
+  send_requests_to_users(driver)
+  accept_invitations_from_users(driver)
 
