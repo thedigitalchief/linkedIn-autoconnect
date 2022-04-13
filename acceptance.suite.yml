@@ -1,0 +1,26 @@
+# Codeception Test Suite Configuration
+
+class_name: AcceptanceTester
+modules:
+    enabled:
+        - WebDriver
+        - Asserts
+        - Helper\Acceptance
+        - Db
+    config:
+        WebDriver:
+            host: chrome
+            # Use an IP like 192.168.1.2 instead of localhost, use this same IP in WordPress siteurl and home options.
+            url: http://localhost
+            browser: chrome
+            port: 4444
+            window_size: 1024x768
+            restart: true
+        Db:
+            dsn: 'mysql:host=mysql:3306;dbname=wordpress'
+            user: 'wordpress'
+            password: 'wordpress'
+            dump: 'tests/_data/dump.sql'
+            populate: true
+            cleanup: true
+            reconnect: true
