@@ -1,11 +1,13 @@
 # Automated LinkedIn Networking Bot
 
 ## About
-  * Scrapes data of LinkedIn connections and their connections
+  * Gathers data of LinkedIn connections and their connections (can be configured to between 1st degree and 2nd degree connections) analyzes an individual's connections, attributes, and similarity to you. It then automatically requests to connect with those who have desirable attributes, connections, and/or similarities
   * Set parameters determine if bot will choose to send connection request
   * Developed with Python3 Selenium 
 
+
 ## Features
+
 
 
 ## Challenges
