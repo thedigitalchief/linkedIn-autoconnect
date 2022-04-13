@@ -1,4 +1,4 @@
-# Automated LinkedIn Connections Analysis Webscraping Bot
+# Automated LinkedIn Networking Bot
 
 ## About
   * Scrapes data of LinkedIn connections and their connections
