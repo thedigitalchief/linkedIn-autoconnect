@@ -1,4 +1,4 @@
-# Automated Gas Price Analysis Webscraping Bot
+# Automated LinkedIn Connections Analysis Webscraping Bot
 
 ## About
   * Scrapes data of LinkedIn connections and their connections
