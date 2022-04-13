@@ -41,3 +41,9 @@ def take_a_screenshot(driver):
   loc_time = time.localtime()
   time_string = time.strftime("%m/%d/%Y", loc_time)
   driver.save_screenshot(time_string+"_screenshot.png")
+
+
+def  accept_invitations_from_users(driver):
+  javaScript =  "window.scrollBy(0,0);"
+  driver.execute_script(javaScript)
+ 
