@@ -7,6 +7,7 @@
 
 ## Features
 
+Automated LinkedIn Connections Analysis Webscraping Bot
 
 ## Challenges
 
