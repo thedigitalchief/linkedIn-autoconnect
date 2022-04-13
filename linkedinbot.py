@@ -43,7 +43,18 @@ def take_a_screenshot(driver):
   driver.save_screenshot(time_string+"_screenshot.png")
 
 
+
 def  accept_invitations_from_users(driver):
   javaScript =  "window.scrollBy(0,0);"
   driver.execute_script(javaScript)
+  element_exists =  True
+  
+  while element_exists:
+    try:
+      driver.find_element_by_class_name("invitation-card__action-btn")
+    except NoSuchElementException:
+      element_exists =  False
+    finally :
+      if element_exists:
+        driver.find_element_by_class_name("invitation-card__action-btn artdeco-button--secondary").click()
  
