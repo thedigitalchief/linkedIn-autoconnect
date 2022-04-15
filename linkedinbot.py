@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -19,9 +20,9 @@ def main():
 #log in to the LinkedIn account
 def login_to_linkedin(driver):
   username = driver.find_element_by_id("session_key")
-  username.send_keys("Your Email Goes Here")
+  username.send_keys("me@dylanhnguyen.com")
   password = driver.find_element_bçy_id("session_password")
-  password.send_keys("Your Password Goes Here")
+  password.send_keys("<password>")
   driver.find_element_by_class_name("sign-in-form__submit-button").click()
 
 
@@ -41,13 +42,13 @@ def send_requests_to_users(driver):
   for i in  range(0, n):
     pag.click(441, 666)
 
-  print("Done !")
+  print("Done!")
 
 
 def take_a_screenshot(driver):
   loc_time = time.localtime()
   time_string = time.strftime("%m/%d/%Y", loc_time)
-  driver.save_screenshot(time_string+"_screenshot.png")
+  driver.save_screenshot(time_string+"linkedinbot-screenshot.png")
 
 
 
