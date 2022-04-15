@@ -6,7 +6,8 @@ from selenium.webdriver.common.by import By
 import pyautogui as pag
 import pylab 
 import time
-
+import variables
+import parsel
 
 #defining variables
 def main():
@@ -30,6 +31,12 @@ def goto_network_page(driver,network_url):
   driver.get(network_url)
 
 
+def google_search(driver, username, password):
+  driver.get(variables.search_query)
+  username.send_keys(variables.linkedin_username)
+  password.send_keys(variables.linkedin_password)
+
+
 def send_requests_to_users(driver):
   WebDriverWait(driver, 60).until(
     EC.presence_of_element_located((By.CLASS_NAME, "class name of an element"))
@@ -45,10 +52,10 @@ def send_requests_to_users(driver):
   print("Done!")
 
 
-def take_a_screenshot(driver):
+def  take_a_screenshot(driver):
   loc_time = time.localtime()
   time_string = time.strftime("%m/%d/%Y", loc_time)
-  driver.save_screenshot(time_string+"linkedinbot-screenshot.png")
+  driver.save_screenshot(time_string+"_screenshot.png")
 
 
 def accept_invitations_from_users(driver):
@@ -70,6 +77,7 @@ def accept_invitations_from_users(driver):
 def start_bot(driver,url,network_url):
   driver.get(url)
   login_to_linkedin(driver)
+  
   goto_network_page(driver,network_url)
   send_requests_to_users(driver)
   accept_invitations_from_users(driver)
