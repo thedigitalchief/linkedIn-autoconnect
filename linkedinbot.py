@@ -12,7 +12,7 @@ import time
 def main():
   url = "https://www.linkedin.com/"
   network_url = "https://linkedin.com/mynetwork/"
-  driver = webdriver.Chrome()
+  driver = webdriver.Chrome("/usr/local/bin")
   start_bot(driver,url,network_url)
   driver.get(url)
 
@@ -23,7 +23,8 @@ def login_to_linkedin(driver):
   username.send_keys("me@dylanhnguyen.com")
   password = driver.find_element_bçy_id("session_password")
   password.send_keys("<password>")
-  driver.find_element_by_class_name("sign-in-form__submit-button").click()
+  login_button = driver.find_element_by_class_name("sign-in-form__submit-button")
+  login_button.click()
 
 
 def goto_network_page(driver,network_url):
@@ -41,7 +42,6 @@ def send_requests_to_users(driver):
 
   for i in  range(0, n):
     pag.click(441, 666)
-
   print("Done!")
 
 
