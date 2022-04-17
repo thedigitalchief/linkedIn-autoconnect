@@ -40,19 +40,16 @@ def google_search(driver, username, password):
 def send_requests_to_users(driver):
   WebDriverWait(driver, 60).until(
     EC.presence_of_element_located((By.CLASS_NAME, "class name of an element"))
-  )
-
+)
   javaScript =  "window.scrollBy(0,4000);"
   driver.execute_script(javaScript)
   n =  int(input("Number of requests: "))
-
   for i in  range(0, n):
     pag.click(441, 666)
+  print("Done !")
 
-  print("Done!")
 
-
-def  take_a_screenshot(driver):
+def take_a_screenshot(driver):
   loc_time = time.localtime()
   time_string = time.strftime("%m/%d/%Y", loc_time)
   driver.save_screenshot(time_string+"_screenshot.png")
@@ -77,7 +74,6 @@ def accept_invitations_from_users(driver):
 def start_bot(driver,url,network_url):
   driver.get(url)
   login_to_linkedin(driver)
-  
   goto_network_page(driver,network_url)
   send_requests_to_users(driver)
   accept_invitations_from_users(driver)

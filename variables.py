@@ -1,6 +1,6 @@
 
 
-search_query = 'site:linkedin.com/in/ AND "computer science" AND "code" AND "engineer"'
+search_query = 'site:linkedin.com/in/ AND "computer science" AND "developer" AND "engineer"'
 
 file_name = 'results.csv'
 
