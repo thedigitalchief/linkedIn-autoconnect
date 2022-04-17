@@ -1,21 +1,33 @@
 from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait, Select
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
+from webdriver_manager.chrome import ChromeDriverManager
+from chromedriver_py import binary_path
 import pyautogui as pag
 import pylab 
 import time
+import requests
 import variables
 import parsel
 
+#System.setProperty("webdriver.chrome.driver","/Users/dylannguyen/Documents/Coding - Local/Projects/Automated LinkedIn Networking Bot/automated-linkedin-networking-bot")
+
+#setting parameters so Chrome and webpage detect botting
+options = webdriver.ChromeOptions()
+options.add_argument("--no-sandbox")
+options.add_argument("--headless")
+options.add_argument("--window-size=1920,1080")
+options.add_argument("--disable-extensions")
+
+
 #defining variables
-def main():
-  url = "https://www.linkedin.com/"
-  network_url = "https://linkedin.com/mynetwork/"
-  driver = webdriver.Chrome()
-  start_bot(driver,url,network_url)
-  driver.get(url)
+
+url = "https://www.linkedin.com/"
+network_url = "https://linkedin.com/mynetwork/"
+driver = webdriver.Chrome()
+driver.get(url)
 
 
 #log in to the LinkedIn account
@@ -71,8 +83,8 @@ def accept_invitations_from_users(driver):
 
 
 #connecting the functions and methods
-def start_bot(driver,url,network_url):
-  driver.get(url)
+def main(driver,url,network_url):
+  start_bot(driver)
   login_to_linkedin(driver)
   goto_network_page(driver,network_url)
   send_requests_to_users(driver)
