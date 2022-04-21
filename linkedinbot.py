@@ -5,6 +5,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from webdriver_manager.chrome import ChromeDriverManager
 from chromedriver_py import binary_path
+import os, random, sys, time, re, csv, datetime
+from configure import *
 import pyautogui as pag
 import pylab 
 import time
@@ -14,7 +16,13 @@ import parsel
 
 #System.setProperty("webdriver.chrome.driver","/Users/dylannguyen/Documents/Coding - Local/Projects/Automated LinkedIn Networking Bot/automated-linkedin-networking-bot")
 
+
 #setting parameters so Chrome and webpage detect botting
+options = webdriver.ChromeOptions()
+options.add_argument("--no-sandbox")
+options.add_argument("--headless")
+options.add_argument("--window-size=1920,1080")
+options.add_argument("--disable-extensions")
 
 
 
@@ -44,7 +52,7 @@ def login(driver):
   submit_button = driver.find_element_by_xpath("//button[@type='submit']")
   submit_button.click()
 
-  login(driver, url, network_url)
+  start_bot(driver, url, network_url)
 
 
 def goto_network_page(driver,network_url):
@@ -99,6 +107,5 @@ def start_bot(driver, url, network_url):
   send_requests_to_users(driver)
   accept_invitations_from_users(driver)
 
-if __name__ == "__start_bot__":
-    start_bot()
+
     
