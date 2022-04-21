@@ -150,10 +150,25 @@ def get_visibility():
         sleep(10)
 
 
-def connection_test():
-  driver.get("https://www.linkedin.com/mynetwork/invitation-manager/sent")
-  sleep(10)
+def connection_withdrawer():
 
+    driver.get("https://www.linkedin.com/mynetwork/invitation-manager/sent")
+    sleep(10)
+
+    c = driver.find_elements_by_xpath("//*[@class='invitation-card__action-btn artdeco-button artdeco-button--muted artdeco-button--3 artdeco-button--tertiary ember-view']")
+    page_number = 1
+    print(len(c))
+
+    while len(c) > 0:
+        for i in c:
+            sleep(2)
+            driver.execute_script("arguments[0].click();", i)
+
+            sleep(2)
+            driver.find_element_by_xpath("//*[@class='artdeco-modal__confirm-dialog-btn artdeco-button artdeco-button--2 artdeco-button--primary ember-view']").click()
+            
+            sleep(2)
+            c = driver.find_elements_by_xpath("//*[@class='invitation-card__action-btn artdeco-button artdeco-button--muted artdeco-button--3 artdeco-button--tertiary ember-view']")
 
 
 if __name__ == '__main__':
