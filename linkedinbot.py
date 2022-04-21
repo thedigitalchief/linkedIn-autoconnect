@@ -6,11 +6,8 @@ from selenium.common.exceptions import NoSuchElementException, WebDriverExceptio
 from webdriver_manager.chrome import ChromeDriverManager
 from configure import *
 import pyautogui as pag
-import pylab 
 from time import sleep
-import requests
-import variables
-import parsel
+
 
 #System.setProperty("webdriver.chrome.driver","/Users/dylannguyen/Documents/Coding - Local/Projects/Automated LinkedIn Networking Bot/automated-linkedin-networking-bot")
 
@@ -108,24 +105,56 @@ def send_requests():
 def visibilty(company_name):
 
     driver.get("https://www.linkedin.com/company/" + company_name + "/people/")
- 
+    list = []
+    sleep(2)
+
+    number = driver.find_element_by_xpath("//*[@class='t-20 t-black']")
+    c = number.text
+
+    print("Total", c)
+    number = int(input("Enter Number Of profiles you want to visit:"))
+
+    while True:
+        number -= 10
+        try:
+            driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
+            sleep(2.5)
+        except WebDriverException:
+            break
+        if number < 0:
+            break
+
+    links_list = driver.find_elements_by_xpath("//*[@class='ember-view link-without-visited-state']")
+
+    for i in links_list:
+        list.append(i.get_attribute('href'))
+
+    for i in list[0:number]:
+        print(i)
+        sleep(2)
+        try:
+            driver.get(i)
+            print("visited", i)
+        except WebDriverException:
+            break
 
 
 if __name__ == '__main__':
+
   login_url = "https://www.linkedin.com/login?fromSignIn=true&trk=guest_homepage-basic_nav-header-signin"
   network_url = "https://www.linkedin.com/mynetwork/"
 
-  # Taking user input to set credentials
+  # asking for user input to set credentials and automate login process
   email = input("Enter your email: ")
   password = input("Enter your password: ")
 
-  # Driver running
+  # runs the driver, this one is chrome
   driver = webdriver.Chrome()
 
-    # Calling the login function
+  # calls my login function
   login()
 
-    # wrong email check condition is left.
+  # wrong email check condition is left.
 
 
 
