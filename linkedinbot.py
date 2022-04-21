@@ -33,7 +33,7 @@ def login():
 
     # Submitting the login request
     driver.find_element_by_xpath(
-        '//*[contains(concat( " ", @class, " " ), concat( " ", "mercado-button--primary", " " ))]').click()
+        '//*[@id="organic-div"]/form/div[3]/button').click()
 
 
 def check_password():
@@ -141,7 +141,13 @@ def visibilty(company_name):
 def get_visibility():
     links = []
     list_links = driver.find_elements_by_xpath("//div[@class='discover-entity-type-card__info-container']//a")
-    sleep(10)
+
+    for j in list_links:
+        links.append(j.get_attribute('href'))
+    for j in links[0:no_of_requests]:
+        driver.get(j)
+        print("Profile visited ", j)
+        sleep(10)
 
 
 def connection_test():
