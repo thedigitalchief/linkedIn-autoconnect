@@ -138,8 +138,15 @@ def visibilty(company_name):
             break
 
 
-def start_visibility():
+def get_visibility():
     links = []
+    list_links = driver.find_elements_by_xpath("//div[@class='discover-entity-type-card__info-container']//a")
+    sleep(10)
+
+
+def connection_test():
+  driver.get("https://www.linkedin.com/mynetwork/invitation-manager/sent")
+  sleep(10)
 
 
 
