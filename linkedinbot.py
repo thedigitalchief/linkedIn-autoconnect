@@ -69,6 +69,23 @@ def open_networks():
 
 
 def send_requests():
+    flag = 1
+    count_skipped = 0
+    requests = 0
+
+    while flag:
+      #Getting all button elements
+        button_elements = driver.find_elements_by_xpath('//*[contains(concat( " ", @class, " " ), concat( " ", "artdeco-button__text", " " ))]')
+
+        for i in button_elements:
+            if i.text == 'Connect':
+                try:
+                    i.click()
+                    print("Connection Request send")
+                    requests += 1
+               
+        sleep(2.5)
+
 
 
 if __name__ == '__main__':
