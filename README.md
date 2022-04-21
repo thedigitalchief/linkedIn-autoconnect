@@ -6,7 +6,7 @@
   * Developed with Python3 Selenium 
 
 
-![](inkedin-networking-bot-demo.gif)
+![](linkedin-networking-bot-demo.gif)
 
 
 
