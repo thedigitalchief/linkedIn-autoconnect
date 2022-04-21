@@ -8,11 +8,9 @@ from configure import *
 import pyautogui as pag
 from time import sleep
 
-
-#System.setProperty("webdriver.chrome.driver","/Users/dylannguyen/Documents/Coding - Local/Projects/Automated LinkedIn Networking Bot/automated-linkedin-networking-bot")
-
 # setting parameters so Chrome and webpage detect botting
 
+#System.setProperty("webdriver.chrome.driver","/Users/dylannguyen/Documents/Coding - Local/Projects/Automated LinkedIn Networking Bot/automated-linkedin-networking-bot")
 #options = webdriver.ChromeOptions()
 #options.add_argument("--no-sandbox")
 #options.add_argument("--headless")
@@ -20,9 +18,9 @@ from time import sleep
 #options.add_argument("--disable-extensions")
 
 
-
 #log in to the LinkedIn account
 def login():
+
     driver.get(login_url)
     sleep(2)
 
@@ -47,6 +45,7 @@ def check_password():
         elif "Password must be 6 characters or more" in error.text:
             print("Short Password")
             return 0
+
     except NoSuchElementException:
         return 1
     else:
@@ -154,7 +153,11 @@ if __name__ == '__main__':
   # calls my login function
   login()
 
-  # wrong email check condition is left.
+  # wrong email check condition is now remaining...
+
+  # Check for correct password
+  if check_credentials():
+      sleep(5)
 
 
 
