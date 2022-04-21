@@ -1,4 +1,4 @@
 # Configure account credentials which are imported into main
 
-email = 'me@dylanhnguyen.com'
-password = 'yourPassword'
+email = input("Enter your email: ")
+password = input("Enter your password: ")
