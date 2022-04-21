@@ -69,3 +69,55 @@ if __name__ == '__main__':
     bot = LinkedinBot(username, password)
     bot.login(username, password)
     bot.search(search_text, connect=True)
+
+def goto_network_page(driver,network_url):
+  driver.get(network_url)
+
+
+def google_search(driver, username, password):
+  driver.get(variables.search_query)
+  username.send_keys(variables.linkedin_username)
+  password.send_keys(variables.linkedin_password)
+
+
+def send_requests_to_users(driver):
+  WebDriverWait(driver, 60).until(
+    EC.presence_of_element_located((By.CLASS_NAME, "class name of an element"))
+)
+  javaScript =  "window.scrollBy(0,4000);"
+  driver.execute_script(javaScript)
+  n =  int(input("Number of requests: "))
+  for i in  range(0, n):
+    pag.click(441, 666)
+  print("Done !")
+
+
+def take_a_screenshot(driver):
+  loc_time = time.localtime()
+  time_string = time.strftime("%m/%d/%Y", loc_time)
+  driver.save_screenshot(time_string+"_screenshot.png")
+
+
+def accept_invitations_from_users(driver):
+  javaScript =  "window.scrollBy(0,0);"
+  driver.execute_script(javaScript)
+  element_exists = True
+
+  while element_exists:
+    try:
+      driver.find_element_by_class_name("invitation-card__action-btn")
+    except NoSuchElementException:
+      element_exists = False
+    finally :
+      if element_exists:
+        driver.find_element_by_class_name("invitation-card__action-btn artdeco-button--secondary").click()
+
+
+
+#connecting the functions and methods
+def start_bot(driver, url, network_url):
+  driver.get(url)
+  login(driver)
+  goto_network_page(driver,network_url)
+  send_requests_to_users(driver)
+  accept_invitations_from_users(driver)
