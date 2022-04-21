@@ -43,6 +43,23 @@ def login():
         '//*[contains(concat( " ", @class, " " ), concat( " ", "mercado-button--primary", " " ))]').click()
 
 
+def check_password():
+
+
+def check_email():
+
+
+def check_credentials():
+
+
+def open_networks():
+
+
+def send_requests():
+
+
+if __name__ == '__main__':
+
 def goto_network_page(driver,network_url):
   driver.get(network_url)
 
