@@ -6,7 +6,8 @@
   * Developed with Python3 Selenium 
 
 
-## Features
+![](inkedin-networking-bot-demo.gif)
+
 
 
 
