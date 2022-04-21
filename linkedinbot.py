@@ -59,6 +59,20 @@ def send_requests():
 
 
 if __name__ == '__main__':
+   login_url = "https://www.linkedin.com/login?fromSignIn=true&trk=guest_homepage-basic_nav-header-signin"
+  `network_url = "https://www.linkedin.com/mynetwork/"
+
+    # Taking user input to set credentials
+  email = input("Enter your email: ")
+  password = input("Enter your password: ")
+
+    # Driver running
+  driver = webdriver.Chrome()
+
+    # Calling the login function
+  login()
+
+    # wrong email check condition is left.
 
 def goto_network_page(driver,network_url):
   driver.get(network_url)
