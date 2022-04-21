@@ -42,19 +42,30 @@ def login():
 
 
 def check_password():
-   try:
+    try:
         error = driver.find_element_by_id("error-for-password")
         if "Hmm, that's not the right password" in error.text:
             print("Wrong Password")
             return 0
+        elif "Password must be 6 characters or more" in error.text:
+            print("Short Password")
+            return 0
+    except NoSuchElementException:
+        return 1
+    else:
+        return 0
+
 
 def check_email():
-
+  return 1
 
 def check_credentials():
+  return 0
 
 
 def open_networks():
+  driver.get(network_url)
+  driver.maximize_window()
 
 
 def send_requests():
@@ -62,7 +73,7 @@ def send_requests():
 
 if __name__ == '__main__':
   login_url = "https://www.linkedin.com/login?fromSignIn=true&trk=guest_homepage-basic_nav-header-signin"
-  `network_url = "https://www.linkedin.com/mynetwork/"
+  network_url = "https://www.linkedin.com/mynetwork/"
 
   # Taking user input to set credentials
   email = input("Enter your email: ")
