@@ -30,3 +30,17 @@
 *.exe
 *.out
 *.app
+
+#VSCode stuff 
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for VSCode
+.history/
+
+# Built VSCode Extensions
+*.vsix
