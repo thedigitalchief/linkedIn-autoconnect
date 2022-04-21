@@ -2,10 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import NoSuchElementException, WebDriverException
 from webdriver_manager.chrome import ChromeDriverManager
-from chromedriver_py import binary_path
-import os, random, sys, time, re, csv, datetime
 from configure import *
 import pyautogui as pag
 import pylab 
@@ -44,7 +42,11 @@ def login():
 
 
 def check_password():
-
+   try:
+        error = driver.find_element_by_id("error-for-password")
+        if "Hmm, that's not the right password" in error.text:
+            print("Wrong Password")
+            return 0
 
 def check_email():
 
@@ -59,20 +61,22 @@ def send_requests():
 
 
 if __name__ == '__main__':
-   login_url = "https://www.linkedin.com/login?fromSignIn=true&trk=guest_homepage-basic_nav-header-signin"
+  login_url = "https://www.linkedin.com/login?fromSignIn=true&trk=guest_homepage-basic_nav-header-signin"
   `network_url = "https://www.linkedin.com/mynetwork/"
 
-    # Taking user input to set credentials
+  # Taking user input to set credentials
   email = input("Enter your email: ")
   password = input("Enter your password: ")
 
-    # Driver running
+  # Driver running
   driver = webdriver.Chrome()
 
     # Calling the login function
   login()
 
     # wrong email check condition is left.
+
+
 
 def goto_network_page(driver,network_url):
   driver.get(network_url)
