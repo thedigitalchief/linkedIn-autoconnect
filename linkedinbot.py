@@ -13,9 +13,9 @@ import pandas as pd
 import pyautogui
 from urllib.request import urlopen
 from webdriver_manager.chrome import ChromeDriverManager
-import re
-import yaml
-from datetime import datetime, timedelta
+import pyautogui as pag
+from time import sleep
+
 
 # setting parameters so Chrome and webpage detect botting
 
@@ -42,16 +42,16 @@ def login():
 
     # Submitting the login request
     driver.find_element_by_xpath(
-        '//*[contains(concat( " ", @class, " " ), concat( " ", "mercado-button--primary", " " ))]').click()
+        '//*[@id="organic-div"]/form/div[3]/button').click()
 
 
 def check_password():
     try:
         error = driver.find_element_by_id("error-for-password")
-        if "Hmm, that's not the right password" in error.text:
+        if "Hmm, sorry that's not the right password.." in error.text:
             print("Wrong Password")
             return 0
-        elif "Password must be 6 characters or more" in error.text:
+        elif "Password must be 6 characters or more.." in error.text:
             print("Short Password")
             return 0
 
@@ -62,10 +62,15 @@ def check_password():
 
 
 def check_email():
-  return 1
+    # To be completed.
+    return 1
+
 
 def check_credentials():
-  return 0
+    if check_password and check_email:
+        return 1
+    else:
+        return 0
 
 
 def open_networks():
@@ -87,7 +92,7 @@ def send_requests():
             if i.text == 'Connect':
                 try:
                     i.click()
-                    print("Connection Request send")
+                    print("Connection request sent")
                     requests += 1
                 except:
                     print("Skipped", count_skipped)
@@ -120,7 +125,7 @@ def visibilty(company_name):
     c = number.text
 
     print("Total", c)
-    number = int(input("Enter Number Of profiles you want to visit:"))
+    number = int(input("Enter the number of profiles you want to visit:"))
 
     while True:
         number -= 10
@@ -147,6 +152,39 @@ def visibilty(company_name):
             break
 
 
+def get_visibility():
+    links = []
+    list_links = driver.find_elements_by_xpath("//div[@class='discover-entity-type-card__info-container']//a")
+
+    for j in list_links:
+        links.append(j.get_attribute('href'))
+    for j in links[0:no_of_requests]:
+        driver.get(j)
+        print("Profile visited: ", j)
+        sleep(10)
+
+
+def connection_withdrawer():
+
+    driver.get("https://www.linkedin.com/mynetwork/invitation-manager/sent")
+    sleep(10)
+
+    c = driver.find_elements_by_xpath("//*[@class='invitation-card__action-btn artdeco-button artdeco-button--muted artdeco-button--3 artdeco-button--tertiary ember-view']")
+    page_number = 1
+    print(len(c))
+
+    while len(c) > 0:
+        for i in c:
+            sleep(2)
+            driver.execute_script("arguments[0].click();", i)
+
+            sleep(2)
+            driver.find_element_by_xpath("//*[@class='artdeco-modal__confirm-dialog-btn artdeco-button artdeco-button--2 artdeco-button--primary ember-view']").click()
+            
+            sleep(2)
+            c = driver.find_elements_by_xpath("//*[@class='invitation-card__action-btn artdeco-button artdeco-button--muted artdeco-button--3 artdeco-button--tertiary ember-view']")
+
+
 if __name__ == '__main__':
 
   login_url = "https://www.linkedin.com/login?fromSignIn=true&trk=guest_homepage-basic_nav-header-signin"
@@ -166,7 +204,42 @@ if __name__ == '__main__':
 
   # Check for correct password
   if check_credentials():
-      sleep(5)
+        sleep(5)
+        print("Hi, what would you like me to do? Enter a number and press <Enter key>.")
+        print("1. Send connection request + profile visiting")
+        print("2. Only connection requests")
+        print("3. Visit company personel profiles")
+        print("4. Sent connection invitations withdrawal")
+        choice = int(input("Enter Your Choice: "))
+
+        if choice == 1:
+            no_of_requests = int(input("Enter the number of LinkedIn connection requests and profile visits you would like:"))
+            open_networks()
+            sleep(5)
+            send_requests()
+            get_visibility()
+
+        elif choice == 2:
+            open_networks()
+            sleep(5)
+            send_requests()
+
+        elif choice == 3:
+            company = input("Enter the company name: ")
+            visibilty(company)
+
+        elif choice == 4:
+            connection_withdrawer()
+
+        else:
+            print("Whoops wrong option! Please try again, thanks.")
+
+        driver.quit()
+        print("Program is finished.")
+
+  else:
+        driver.quit()
+        print("Please retry with the correct password.")
 
 
 

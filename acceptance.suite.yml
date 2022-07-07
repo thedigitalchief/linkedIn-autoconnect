@@ -17,9 +17,9 @@ modules:
             window_size: 1024x768
             restart: true
         Db:
-            dsn: 'mysql:host=mysql:3306;dbname=wordpress'
-            user: 'wordpress'
-            password: 'wordpress'
+            dsn: 'mysql:host=mysql:3306;dbname=linkedin'
+            user: '(linkedin username)'
+            password: '(linkedin password)'
             dump: 'tests/_data/dump.sql'
             populate: true
             cleanup: true
