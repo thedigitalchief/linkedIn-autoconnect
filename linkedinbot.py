@@ -1,12 +1,21 @@
+import time, random, os, csv, platform
+import logging
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import NoSuchElementException, WebDriverException
+from bs4 import BeautifulSoup
+import pandas as pd
+import pyautogui
+from urllib.request import urlopen
 from webdriver_manager.chrome import ChromeDriverManager
-from configure import *
-import pyautogui as pag
-from time import sleep
+import re
+import yaml
+from datetime import datetime, timedelta
 
 # setting parameters so Chrome and webpage detect botting
 
