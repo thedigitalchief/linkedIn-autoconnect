@@ -2,6 +2,6 @@
 
 from credentials import *
 
-CONFIGURED_EMAIL = email
-CONFIGURED_PASSWORD = password
+CONFIGURED_EMAIL = "<your email>"
+CONFIGURED_PASSWORD = "<your password>"
 
