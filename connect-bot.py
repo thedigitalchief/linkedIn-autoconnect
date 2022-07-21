@@ -1,21 +1,12 @@
-import time, random, os, csv, platform
-import logging
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.common.keys import Keys
-from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
-from bs4 import BeautifulSoup
-import pandas as pd
-import pyautogui
-from urllib.request import urlopen
+from selenium.common.exceptions import NoSuchElementException, WebDriverException
 from webdriver_manager.chrome import ChromeDriverManager
+#from configure import *
 import pyautogui as pag
 from time import sleep
-
 
 # setting parameters so Chrome and webpage detect botting
 
@@ -86,7 +77,8 @@ def send_requests():
 
     while flag:
         #Getting all button elements
-        button_elements = driver.find_elements_by_xpath('//*[contains(concat( " ", @class, " " ), concat( " ", "artdeco-button__text", " " ))]')
+        button_elements = driver.find_elements_by_xpath(
+            '//*[contains(concat( " ", @class, " " ), concat( " ", "artdeco-button__text", " " ))]')
 
         for i in button_elements:
             if i.text == 'Connect':
@@ -97,7 +89,8 @@ def send_requests():
                 except:
                     print("Skipped", count_skipped)
                     try:
-                        driver.find_element_by_class_name("artdeco-button ip-fuse-limit-alert__primary-action artdeco-button--2 artdeco-button--primary ember-view").click()
+                        driver.find_element_by_class_name(
+                            "artdeco-button ip-fuse-limit-alert__primary-action artdeco-button--2 artdeco-button--primary ember-view").click()
                     except NoSuchElementException:
                         pass
                     count_skipped += 1
@@ -112,7 +105,6 @@ def send_requests():
         # scrolls down webpage and refresh the button list
         driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
         sleep(2.5)
-
 
 
 def visibilty(company_name):
@@ -130,14 +122,16 @@ def visibilty(company_name):
     while True:
         number -= 10
         try:
-            driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
+            driver.execute_script(
+                "window.scrollTo(0,document.body.scrollHeight)")
             sleep(2.5)
         except WebDriverException:
             break
         if number < 0:
             break
 
-    links_list = driver.find_elements_by_xpath("//*[@class='ember-view link-without-visited-state']")
+    links_list = driver.find_elements_by_xpath(
+        "//*[@class='ember-view link-without-visited-state']")
 
     for i in links_list:
         list.append(i.get_attribute('href'))
@@ -154,7 +148,8 @@ def visibilty(company_name):
 
 def get_visibility():
     links = []
-    list_links = driver.find_elements_by_xpath("//div[@class='discover-entity-type-card__info-container']//a")
+    list_links = driver.find_elements_by_xpath(
+        "//div[@class='discover-entity-type-card__info-container']//a")
 
     for j in list_links:
         links.append(j.get_attribute('href'))
@@ -169,7 +164,8 @@ def connection_withdrawer():
     driver.get("https://www.linkedin.com/mynetwork/invitation-manager/sent")
     sleep(10)
 
-    c = driver.find_elements_by_xpath("//*[@class='invitation-card__action-btn artdeco-button artdeco-button--muted artdeco-button--3 artdeco-button--tertiary ember-view']")
+    c = driver.find_elements_by_xpath(
+        "//*[@class='invitation-card__action-btn artdeco-button artdeco-button--muted artdeco-button--3 artdeco-button--tertiary ember-view']")
     page_number = 1
     print(len(c))
 
@@ -179,10 +175,12 @@ def connection_withdrawer():
             driver.execute_script("arguments[0].click();", i)
 
             sleep(2)
-            driver.find_element_by_xpath("//*[@class='artdeco-modal__confirm-dialog-btn artdeco-button artdeco-button--2 artdeco-button--primary ember-view']").click()
-            
+            driver.find_element_by_xpath(
+                "//*[@class='artdeco-modal__confirm-dialog-btn artdeco-button artdeco-button--2 artdeco-button--primary ember-view']").click()
+
             sleep(2)
-            c = driver.find_elements_by_xpath("//*[@class='invitation-card__action-btn artdeco-button artdeco-button--muted artdeco-button--3 artdeco-button--tertiary ember-view']")
+            c = driver.find_elements_by_xpath(
+                "//*[@class='invitation-card__action-btn artdeco-button artdeco-button--muted artdeco-button--3 artdeco-button--tertiary ember-view']")
 
 
 if __name__ == '__main__':
@@ -204,16 +202,17 @@ if __name__ == '__main__':
 
   # Check for correct password
   if check_credentials():
-        sleep(5)
-        print("Hi, what would you like me to do? Enter a number and press <Enter key>.")
-        print("1. Send connection request + profile visiting")
-        print("2. Only connection requests")
-        print("3. Visit company personel profiles")
-        print("4. Sent connection invitations withdrawal")
-        choice = int(input("Enter Your Choice: "))
+      sleep(5)
+      print("Hi, what would you like me to do? Enter a number and press <Enter key>.")
+      print("1. Send connection request + profile visiting")
+      print("2. Only connection requests")
+      print("3. Visit company personel profiles")
+      print("4. Sent connection invitations withdrawal")
+      choice = int(input("Enter Your Choice: "))
 
-        if choice == 1:
-            no_of_requests = int(input("Enter the number of LinkedIn connection requests and profile visits you would like:"))
+       if choice == 1:
+            no_of_requests = int(input(
+                "Enter the number of LinkedIn connection requests and profile visits you would like:"))
             open_networks()
             sleep(5)
             send_requests()
@@ -238,10 +237,5 @@ if __name__ == '__main__':
         print("Program is finished.")
 
   else:
-        driver.quit()
-        print("Please retry with the correct password.")
-
-
-
-
-    
+      driver.quit()
+      print("Please retry with the correct password.")
